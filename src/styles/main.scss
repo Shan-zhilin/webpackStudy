@@ -1,0 +1,77 @@
+// SCSS 变量
+$primary-color: #3498db;
+$secondary-color: #2ecc71;
+$font-size-base: 16px;
+$spacing: 20px;
+
+// SCSS Mixin 定义（需要在使用前定义）
+@mixin button-style($bg-color) {
+  background-color: $bg-color;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: $font-size-base;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: darken($bg-color, 10%);
+  }
+
+  &:active {
+    background-color: darken($bg-color, 15%);
+  }
+}
+
+// SCSS 嵌套
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: $spacing;
+
+  // 嵌套选择器
+  .header {
+    background-color: $primary-color;
+    color: white;
+    padding: $spacing;
+    border-radius: 8px;
+
+    h1 {
+      font-size: $font-size-base * 2;
+      margin: 0;
+    }
+  }
+
+  .content {
+    margin-top: $spacing;
+    padding: $spacing;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+
+    p {
+      font-size: $font-size-base;
+      line-height: 1.6;
+      color: #333;
+    }
+  }
+
+  // SCSS Mixin 使用
+  .button {
+    @include button-style($primary-color);
+  }
+
+  .button-secondary {
+    @include button-style($secondary-color);
+  }
+}
+
+// SCSS 函数示例
+.card {
+  width: calc(100% / 3 - #{$spacing});
+  margin: $spacing * 0.5;
+  padding: $spacing;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}

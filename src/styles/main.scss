@@ -1,77 +1,310 @@
-// SCSS 变量
-$primary-color: #3498db;
-$secondary-color: #2ecc71;
-$font-size-base: 16px;
-$spacing: 20px;
+// ========================
+// SCSS 变量定义
+// ========================
+@use "sass:color";
 
-// SCSS Mixin 定义（需要在使用前定义）
-@mixin button-style($bg-color) {
-  background-color: $bg-color;
+$primary-color: #eaac66;
+$secondary-color: #764ba2;
+$success-color: #4CAF50;
+$text-color: #333;
+$text-light: #666;
+$bg-light: #f5f7fa;
+$border-radius: 8px;
+$shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+// ========================
+// 基础样式
+// ========================
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+  color: $text-color;
+  background-color: $bg-light;
+  min-height: 100vh;
+}
+
+// ========================
+// 容器布局
+// ========================
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+// ========================
+// 头部区域 - 使用背景图
+// 这里展示 url-loader/file-loader 的效果
+// ========================
+.header {
+  // 背景图片 - webpack 会处理这个路径
+  background-image: url('../assets/placeholder.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  // 添加渐变遮罩
+  position: relative;
+  padding: 60px 40px;
+  border-radius: $border-radius;
+  margin-bottom: 30px;
   color: white;
+  text-align: center;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba($primary-color, 0.8), rgba($secondary-color, 0.8));
+    border-radius: $border-radius;
+    z-index: 1;
+  }
+  
+  h1 {
+    position: relative;
+    z-index: 2;
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  p {
+    position: relative;
+    z-index: 2;
+    opacity: 0.9;
+    font-size: 1.1rem;
+  }
+}
+
+// ========================
+// 功能展示区
+// ========================
+.demo-section {
+  background: white;
+  border-radius: $border-radius;
+  padding: 25px;
+  margin-bottom: 20px;
+  box-shadow: $shadow;
+  
+  h2 {
+    color: $primary-color;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid $bg-light;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+    // 使用小图标
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background-image: url('../assets/small-icon.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+  }
+  
+  h3 {
+    color: $text-color;
+    margin: 15px 0 10px;
+    font-size: 1rem;
+  }
+}
+
+// ========================
+// 模块展示区
+// ========================
+.module-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.module-item {
+  background: $bg-light;
+  padding: 15px;
+  border-radius: $border-radius;
+  border-left: 4px solid $primary-color;
+  
+  &.commonjs {
+    border-left-color: #e74c3c;
+  }
+  
+  &.esm {
+    border-left-color: #3498db;
+  }
+  
+  .module-name {
+    font-weight: bold;
+    color: $text-color;
+    margin-bottom: 5px;
+  }
+  
+  .module-type {
+    font-size: 0.8rem;
+    color: $text-light;
+    text-transform: uppercase;
+  }
+}
+
+// ========================
+// 控制台输出区
+// ========================
+.console-output {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  padding: 15px;
+  border-radius: $border-radius;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 13px;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 15px;
+  
+  .log-line {
+    padding: 3px 0;
+    border-bottom: 1px solid #333;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    &.info {
+      color: #4fc3f7;
+    }
+    
+    &.success {
+      color: $success-color;
+    }
+    
+    &.warn {
+      color: #ffb74d;
+    }
+  }
+}
+
+// ========================
+// 按钮样式
+// ========================
+.button {
   padding: 10px 20px;
   border: none;
-  border-radius: 4px;
+  border-radius: $border-radius;
   cursor: pointer;
-  font-size: $font-size-base;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: darken($bg-color, 10%);
-  }
-
-  &:active {
-    background-color: darken($bg-color, 15%);
-  }
-}
-
-// SCSS 嵌套
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: $spacing;
-
-  // 嵌套选择器
-  .header {
-    background-color: $primary-color;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  
+  &-primary {
+    background: linear-gradient(135deg, $primary-color, $secondary-color);
     color: white;
-    padding: $spacing;
-    border-radius: 8px;
-
-    h1 {
-      font-size: $font-size-base * 2;
-      margin: 0;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba($primary-color, 0.4);
     }
   }
-
-  .content {
-    margin-top: $spacing;
-    padding: $spacing;
-    background-color: #f5f5f5;
-    border-radius: 4px;
-
-    p {
-      font-size: $font-size-base;
-      line-height: 1.6;
-      color: #333;
+  
+  &-secondary {
+    background: $bg-light;
+    color: $text-color;
+    border: 1px solid #ddd;
+    
+    &:hover {
+      background: color.adjust($bg-light, $lightness: -5%);
     }
-  }
-
-  // SCSS Mixin 使用
-  .button {
-    @include button-style($primary-color);
-  }
-
-  .button-secondary {
-    @include button-style($secondary-color);
   }
 }
 
-// SCSS 函数示例
-.card {
-  width: calc(100% / 3 - #{$spacing});
-  margin: $spacing * 0.5;
-  padding: $spacing;
-  background: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
+// ========================
+// 图片展示区
+// ========================
+.image-demo {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+  
+  .image-box {
+    text-align: center;
+    
+    img {
+      max-width: 200px;
+      border-radius: $border-radius;
+      box-shadow: $shadow;
+    }
+    
+    p {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: $text-light;
+    }
+  }
+}
+
+// ========================
+// HMR 指示器
+// ========================
+.hmr-indicator {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: $success-color;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-size: 14px;
+  box-shadow: $shadow;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  
+  .dot {
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+// ========================
+// 依赖图展示
+// ========================
+.dependency-graph {
+  background: $bg-light;
+  padding: 20px;
+  border-radius: $border-radius;
+  margin-top: 15px;
+  
+  pre {
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 12px;
+    line-height: 1.8;
+    color: $text-color;
+    white-space: pre-wrap;
+  }
 }

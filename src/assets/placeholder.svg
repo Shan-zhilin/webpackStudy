@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#grad1)"/>
+  <text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" 
+        font-family="Arial, sans-serif" font-size="24" fill="white" font-weight="bold">
+    Webpack Demo
+  </text>
+  <text x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" 
+        font-family="Arial, sans-serif" font-size="14" fill="rgba(255,255,255,0.8)">
+    file-loader / url-loader 示例图片
+  </text>
+  <circle cx="80" cy="70" r="30" fill="rgba(255,255,255,0.2)"/>
+  <rect x="300" y="220" width="60" height="60" rx="10" fill="rgba(255,255,255,0.2)"/>
+</svg>
+
